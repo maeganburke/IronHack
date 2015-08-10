@@ -1,0 +1,27 @@
+<%= form_for(product) do |f| %>
+
+<%= render 'layouts/errors', model: product %>
+
+	<div>
+		<%= f.label :title %>
+		<br>
+		<%= f.text_field :title %>
+	</div>
+
+	<div>
+		<%= f.label :description %>
+		<br>
+		<%= f.text_field :description %>
+	</div>
+
+	<div>
+		<%= f.label :deadline %>
+		<br>
+		<%= f.date_field :deadline %>
+	</div>
+
+	<div>
+		<%= f.submit %>
+	</div>
+
+<% end %>

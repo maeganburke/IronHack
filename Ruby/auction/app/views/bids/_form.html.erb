@@ -1,0 +1,15 @@
+<%= form_for(bid) do |f| %>
+
+<%= render 'layouts/errors', model: bid %>
+
+	<div>
+		<%= f.label :amount %>
+		<br>
+		<%= f.text_field :amount %>
+	</div>
+
+	<div>
+		<%= f.submit %>
+	</div>
+
+<% end %>

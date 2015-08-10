@@ -1,0 +1,30 @@
+
+		<h1>Up for bidding: <%= @product.title %></h1>
+
+		<p><%= @product.show_description %></p>
+
+		<% if @product.deadline.present? %>
+
+			<p>Submit your bid by: 
+			<%= @product.show_deadline %></p>
+			
+		<% end %>
+
+		<p><strong>Would you like to bid on this item?</strong></p>
+
+		<%= form_for[@product, @bid] do |f| %>
+
+			<%= f.label :amount %>
+			<br>
+			<%= f.text_field :amount %>
+			<%= f.submit %>
+
+		<% end %>
+
+		<h2> Here are the current bids (listed anonymously): </h2>
+		<ul>
+			<% @bids.each do |bid| %>
+				<li><%= bid.amount %></li>
+			<% end %>
+		</ul>
+

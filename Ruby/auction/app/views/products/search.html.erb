@@ -1,0 +1,9 @@
+<h1>Here are your results!</h1>
+			<ol> 
+				<% @products.each do |product| %>
+					<li>
+						<%= link_to product.show_title,
+						product_path(product) %>
+					</li>
+				<% end %>
+			</ol>

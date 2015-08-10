@@ -1,0 +1,48 @@
+<body>
+<head>
+
+	<title>Maegan's To Do List</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+
+<div class="container">
+<div class="jumbotron">
+	<h1>To Do</h1>
+
+	<input type="text" name="add-task" class="add-task" placeholder="add your task" ng-model="taskDetails" ng-keyup="addTask()"/>
+
+	  <select ng-model="priority" multiple>
+	  	<option value='normal'>Normal</option>
+    	<option value='medium'>Medium</option>
+    	<option value='high'>High</option>
+	  </select>
+
+<!-- 	   <label class="radio-inline">
+	   		<input type="radio" id="inlineRadio1" value="option1">low
+	   </label>
+
+	   <label class="radio-inline">
+	   		<input type="radio" id="inlineRadio2" value="option2">normal
+	   </label>
+
+	   <label class="radio-inline">
+	   		<input type="radio" id="inlineRadio3" value="option3">high
+	   </label>
+ -->
+</div>
+
+<ul class="row list-unstyled vertical-align col-md-12" id="list"> 
+	<li ng-repeat="task in tasks track by $index">
+
+		<input type="checkbox" name="checkbox" ng-model="task.completed"/>
+		<span class="completed-{{task.completed}}">{{task.detail}}</span>
+		<span class="priority {{task.priority}}">{{task.priority}}</span>
+
+	</li>
+</ul>
+</div>
+
+</body>

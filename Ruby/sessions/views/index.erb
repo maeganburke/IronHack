@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Hactivist List</title>
+	</head>
+	<h1>Hactivist List</h1>
+	<h2>Participating Hackers</h2>
+	<body>
+		<ol>
+			<li> <%= @user %> </li>
+		</ol>
+		<h2>Join the List</h2>
+		<form action="/signup" method="post">
+			<p><label>Full Name: <input name="fullname" type="text"/></label></p>
+			<p><label>Username: <input name="username" type="text"/></label></p>
+			<input type="submit" name="userinfo" value="Sign Up Here!"/> 			
+		</form>
+	</body>
+</html>

@@ -1,0 +1,23 @@
+
+		<div>
+			<h1> Current Items for Sale </h1>
+
+			<ol>
+				
+				<% @products.each do |product| %>
+					<li>
+						<%= link_to product.show_title,
+						product_path(product) %>
+					</li>
+				<% end %>
+
+			</ol>
+
+			<h2> Need to find a product?</h2>
+			<%= form_tag("/search", method: "get") do %>
+			  <%= label_tag(:search_for, "Search by letter:") %>
+			  <%= text_field_tag(:search_for) %>
+			  <%= submit_tag("Search") %>
+			<% end %>
+		
+		</div>

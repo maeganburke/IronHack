@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+
+	<title>
+		SpotiSearch brought to you by Maedinamerica
+	</title>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bootstrap.css">
+	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<div class="jumbotron">
+				<!-- <div id="mask"></div> -->
+				<div class="container-fluid">
+					<div class="text-center" id="text-center">
+					<div id="jumbotron-text">
+						<h1 class="title">SpotiSearch</h1>
+						<a href="https://github.com/maeganburke" rel="author" id="author">brought to you by maedinamerica.</a>
+
+						<form>
+						<div id="wrapper">
+							<input type="text" name="search" id="search" placeholder="artist name">
+
+							<div id="search-button">
+							<button type="button" class="btn" type="submit" id="submit"><span class="glyphicon glyphicon-search"></span></button>
+							</div>
+						</div>
+						</form>
+					</div>
+					</div>
+				</div>
+			</div>
+
+		<div class="row" id="widgetrow">
+				<div class="widget" id="widget">
+					<div class="header">
+						<!-- Try adding/removing these classes: -->
+						<!-- disabled -->
+						<!-- playing -->
+						<div class="btn-play disabled" id="playbutton">
+						</div>
+
+						<div class="metadata">
+							<p class="songtitle">Hunger of The Pine</p>
+							<p class="songartist">alt-J</p>
+
+							<div class="seekbar">
+							<progress value="5" max="30"></progress>
+							</div>
+						</div>
+
+						<div class="cover">
+							<img src="https://i.scdn.co/image/04da6dfc1f5f45fdeba938a0cc71cf372524fd43">
+						</div>
+
+						<audio src="https://p.scdn.co/mp3-preview/8e9c5ffdc38e91659bfe8b6bd44650dfc25a3d31"></audio>
+
+					</div>
+				</div>
+			</div>
+
+				<div class="row">
+
+					<div class="item artists col-md-4">
+	 					<h1 class="text-center" id="artists"><span class="glyphicon glyphicon-user"></span><br>Artists</h1>
+						<ul class="artists-list list-unstyled text-center">
+						</ul>
+					</div>
+
+					<div class="item albums col-md-4" >
+						<h1 class="text-center" id="albums"><span class="glyphicon glyphicon-cd"></span><br>Albums</h1>
+						<ul class="albums-list list-unstyled text-center">
+						</ul>
+					</div>
+
+					<div class="item tracks col-md-4" >
+						<h1 class="text-center" id="tracks"><span class="glyphicon glyphicon-music" id="playglyph"></span><br>Songs</h1>
+						<ul class="tracks-list list-unstyled text-center">
+						</ul>
+					</div>
+				</div>
+
+			<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+			<script>
+
+				// $('.tracks-list').on('click', 'a.track-link', function(event) {
+				// 	event.preventDefault();
+				// 	var trackID = $(event.currentTarget).attr('data-id');
+				// 	var requestTrackID = $.get('https://api.spotify.com/v1/albums/' +  )
+				// });
+
+				$('')
+
+				var displayTracks = function(tracks) {
+					
+					tracks.items.forEach(function(track) {
+						console.log(track.id);
+						var listTrack = "<li><a href='javascript:' class='track-link' data-url=" + track.preview_url + ">" + track.name + "</a></li>";
+						$(".tracks-list").append(listTrack);
+					});
+
+				};
+
+				$('.albums-list').on('click', 'a.album-link', function(event){
+					event.preventDefault();
+					var searchArtist = $('form').serializeArray();
+					var albumID = $(event.currentTarget).attr('data-id');
+					var requestAlbumID = $.get('https://api.spotify.com/v1/albums/' + albumID + '/tracks');
+					requestAlbumID.done(displayTracks);
+				});
+
+				var displayAlbum = function(albums) {
+					albums.items.forEach(function(album) {
+						console.log(album.id);
+						var listAlbum = "<li><a href='javascript:' class='album-link' data-id='" + album.id + "'>" + album.name + "</a></li>";
+						$(".albums-list").append(listAlbum);
+					});
+				};
+
+				$('.artists-list').on('click', 'a', function(event){
+					event.preventDefault();
+					var artistID = $(event.currentTarget).attr('data-id');
+					var requestID = $.get('https://api.spotify.com/v1/artists/' + artistID + '/albums');
+					requestID.done(displayAlbum);
+				});
+
+				var displayInfo = function(receivedInfo) {
+					receivedInfo.artists.items.forEach(function(item){
+						console.log(item.id);
+						var listArtist = "<li><a href='javascript:' data-id='" + item.id +"'>" + item.name + "</a></li>";
+						$(".artists-list").append(listArtist);
+					});
+				};
+
+				$('form').on('submit', function(event){
+					event.preventDefault();
+					var searchArtist = $('form').serializeArray();
+					var findArtist = $.get('https://api.spotify.com/v1/search?type=artist&query=' + searchArtist[0].value );
+					findArtist.done(displayInfo);
+				});
+
+			</script>
+		</div>
+	</body>
+</html>

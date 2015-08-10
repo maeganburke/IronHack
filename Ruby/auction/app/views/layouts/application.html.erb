@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Maegan's Amazing Auction Site</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+
+<%= yield %>
+	<hr>
+
+	<%= link_to "Create a product listing", products_new_path %>
+
+	 // 
+
+	<%= link_to "View products", products_path %>
+
+	//
+
+	<%= link_to "Search for products", searchproducts_path %>
+
+	<p>
+
+	<%= link_to "New user? Register now", users_new_path %>
+
+	 // 
+
+	<%= link_to "View users", users_path %>
+
+	</p>
+
+</body>
+</html>
